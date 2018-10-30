@@ -3,6 +3,8 @@ package com.ka.mcnew.autocomplete.sample.androidautocomplete
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputFilter
+import android.util.Log
+import android.view.View
 import android.widget.AdapterView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -26,6 +28,25 @@ class MainActivity : AppCompatActivity() {
             setOnTouchListener { _, _ ->
                 showDropDown()
                 false
+            }
+        }
+
+        ac_text_2.apply {
+            setAdapter(adapter)
+            threshold = 1
+            filters = arrayOf<InputFilter>(InputFilter.AllCaps())
+            onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
+                val vo = parent!!.getItemAtPosition(position) as DataFilters
+                val strItem = vo.filterName
+                setText(strItem)
+            }
+            setOnTouchListener { _, _ ->
+                showDropDown()
+                false
+            }
+
+            onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                Log.d("onFocus", "$hasFocus")
             }
         }
     }
