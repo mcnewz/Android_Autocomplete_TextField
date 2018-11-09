@@ -67,7 +67,10 @@ class TextAdapterGeneric(context: Context?,
                 val matchValues = ArrayList<DataFilters>()
 
                 for (dataItem in dataListAllItems!!) {
-                    if (dataItem.filterName!!.toUpperCase().startsWith(searchStrLowerCase)) {
+//                    if (dataItem.filterName!!.toUpperCase().startsWith(searchStrLowerCase)) {
+                    val text = dataItem.filterName + "contain"
+                    if (text.toUpperCase().contains(searchStrLowerCase)) {
+                        Log.d("testtest", text)
                         matchValues.add(dataItem)
                     }
                 }
